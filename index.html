@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazı Aletlerinin Tarihsel Evrimi</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,300&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #f59e0b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --line-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header / Hero Section */
+        header {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            padding: 20px;
+            position: relative;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            text-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: var(--text-muted);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        /* Interactive Timeline Section */
+        .timeline-container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* Central Vertical Line */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--line-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        /* Timeline Item */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        /* Timeline Marker Circle */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--accent-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-item:hover::after {
+            transform: scale(1.3);
+            background-color: var(--accent-color);
+        }
+
+        /* Content Card */
+        .content {
+            padding: 25px;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.15);
+        }
+
+        .date-badge {
+            display: inline-block;
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .icon-box {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Interactive Playground / Canvas Section */
+        .interactive-section {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .interactive-section h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .interactive-section p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        #drawing-canvas {
+            background-color: #ffffff;
+            border-radius: 8px;
+            cursor: crosshair;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+            touch-action: none;
+        }
+
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--line-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .timeline-container::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item.right {
+                left: 0%;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Yazı Aletlerinin Evrimi</h1>
+        <p>İnsanlığın düşüncelerini kaydetme yolculuğu: Kil tabletlerden günümüzün dijital ekranlarına kadar yazı gereçlerinin tarihi.</p>
+        <a href="#timeline" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
+    </header>
+
+    <!-- Timeline Section -->
+    <section class="timeline-container" id="timeline">
+
+        <!-- Item 1 -->
+        <div class="timeline-item left">
+            <div class="content">
+                <span class="date-badge">M.Ö. 3500</span>
+                <div class="icon-box"><i class="fa-solid fa-pen-nib"></i></div>
+                <h3>Stilus ve Kil Tabletler</h3>
+                <p>Sümerler, ucu sivri kamışlar (Stilus) kullanarak ıslak kil tabletler üzerine çivi yazısı kazıdılar. Bu, insanlık tarihinin bilinen ilk yazı gereci kabul edilir.</p>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="timeline-item right">
+            <div class="content">
+                <span class="date-badge">M.Ö. 3000</span>
+                <div class="icon-box"><i class="fa-solid fa-scroll"></i></div>
+                <h3>Fırça ve Papirüs</h3>
+                <p>Eski Mısırlılar, Nil kıyısındaki sazlıklardan yaptıkları papirüs rulolarına kamış fırçalar ve doğal mürekkepler kullanarak hiyeroglifler yazdılar.</p>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="timeline-item left">
+            <div class="content">
+                <span class="date-badge">M.S. 600 - 1800</span>
+                <div class="icon-box"><i class="fa-solid fa-feather-pointed"></i></div>
+                <h3>Tüy Kalemler (Quill)</h3>
+                <p>Kaz ve kuğu tüyleri sivriltilip yarılarak mürekkep tutucu hale getirildi. Yaklaşık 1000 yıl boyunca Avrupa'da ana yazı aracı olarak kullanıldı.</p>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="timeline-item right">
+            <div class="content">
+                <span class="date-badge">1795</span>
+                <div class="icon-box"><i class="fa-solid fa-pencil"></i></div>
+                <h3>Modern Kurşun Kalem</h3>
+                <p>Nicolas-Jacques Conté, kil ve grafik karışımını fırınlayarak tahta muhafaza içine yerleştirdi ve günümüz kurşun kaleminin temelini attı.</p>
+            </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="timeline-item left">
+            <div class="content">
+                <span class="date-badge">1884</span>
+                <div class="icon-box"><i class="fa-solid fa-pen-fancy"></i></div>
+                <h3>Dolma Kalem</h3>
+                <p>Lewis Waterman, kılcal etki prensibini kullanarak mürekkebin sızmadan düzgün akmasını sağlayan ilk güvenilir dolma kalemi patentledi.</p>
+            </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="timeline-item right">
+            <div class="content">
+                <span class="date-badge">1867 / 1938</span>
+                <div class="icon-box"><i class="fa-solid fa-keyboard"></i></div>
+                <h3>Daktilo ve Tükenmez Kalem</h3>
+                <p>Daktilonun icadı seri üretimi başlatırken; László Bíró'nun ucu bilyeli tükenmez kalemi (Ballpoint) günlük yazma alışkanlıklarını kökten değiştirdi.</p>
+            </div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="timeline-item left">
+            <div class="content">
+                <span class="date-badge">Günümüz</span>
+                <div class="icon-box"><i class="fa-solid fa-tablet-screen-button"></i></div>
+                <h3>Dijital Kalemler ve Stylus</h3>
+                <p>Dokunmatik ekran teknolojisiyle birlikte fiziksel mürekkep yerini basınç hassasiyetli dijital sinyallere bıraktı. Apple Pencil ve S-Pen gibi araçlar yeni standart oldu.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Interactive Canvas Area -->
+    <section class="interactive-section">
+        <h2>Dijital Tuval</h2>
+        <p>Aşağıdaki alanı kullanarak bir dijital stylus tecrübesi yaşayabilirsiniz!</p>
+        <canvas id="drawing-canvas" width="600" height="300"></canvas>
+        <div class="controls">
+            <button class="btn" id="clear-btn">Temizle</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Tarihsel Yazı Aletleri Rehberi | Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <!-- JavaScript for Animations and Canvas -->
+    <script>
+        // Scroll Animations (Intersection Observer)
+        const items = document.querySelectorAll('.timeline-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        items.forEach(item => {
+            observer.observe(item);
+        });
+
+        // Simple Drawing Canvas Script
+        const canvas = document.getElementById('drawing-canvas');
+        const ctx = canvas.getContext('2d');
+        const clearBtn = document.getElementById('clear-btn');
+        let isDrawing = false;
+
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mousemove', draw);
+
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('touchmove', draw);
+
+        clearBtn.addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+    </script>
+
+</body>
+</html>
